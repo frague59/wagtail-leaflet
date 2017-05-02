@@ -1,0 +1,11 @@
+# Includes LICENCE.txt
+include LICENCE.txt
+
+# Include template files
+recursive-include wagtailleaflet/templates *
+
+# Include i18n files
+recursive-include wagtailleaflet/locale *
+
+# Exclude docs directory
+prune docs
