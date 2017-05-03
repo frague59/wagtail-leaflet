@@ -2,9 +2,12 @@
 wagtail-leaflet
 ===============
 
-This application provides leaflet blocks integration to Wagtail (StreamFields) blocks
+This project does nothing at all fro this time ! 
 
-+ Documentation : `http://ulysse.ville.tg/docs/wagtail-leaflet/ <http://ulysse.ville.tg/docs/django-buttons/>`_
+It's more a POC than every thing else :)
+
+
+This application provides leaflet blocks integration to Wagtail (StreamFields) blocks
 
 Installation
 ============
