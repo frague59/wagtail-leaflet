@@ -2,7 +2,7 @@
 wagtail-leaflet
 ===============
 
-This project does nothing at all fro this time ! 
+**This project does nothing at all now !** 
 
 It's more a POC than every thing else :)
 
