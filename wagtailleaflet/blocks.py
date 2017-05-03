@@ -33,8 +33,7 @@ class GeoJSONBlock(FieldBlock):
                                       help_text=help_text,
                                       max_length=max_length,
                                       min_length=min_length,
-                                      geom_type=self.geom_type
-                                      )
+                                      geom_type=self.geom_type)
         super(GeoJSONBlock, self).__init__(**kwargs)
 
     def render_form(self, value, prefix='', errors=None):

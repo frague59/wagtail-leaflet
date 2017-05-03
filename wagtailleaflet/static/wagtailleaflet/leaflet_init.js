@@ -1,10 +1,11 @@
 function drawMap(definitionPrefix) {
     console.log('leaflet_init.js: definitionPrefix = ' + definitionPrefix);
 
-    var newItemHtml = $('#' + definitionPrefix).html();
+    var $newItem = $('#' + definitionPrefix + '-map');
 
-    if (newItemHtml.length === 0) {
-        console.error('leaflet_init.js: Unable to find newItemHtml !');
+    if ($newItem.length === 0) {
+        console.error('leaflet_init.js: Unable to find $newItem !');
+        return null;
     }
 
     var initMap = function(definitionPrefix) {
