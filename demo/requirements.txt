@@ -1,0 +1,3 @@
+wagtail
+django-leaflet
+django-geojson
