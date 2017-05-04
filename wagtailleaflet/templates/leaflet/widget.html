@@ -10,13 +10,15 @@
 
 <script type="text/javascript">
     {% block vars %}
+        const DEBUG_LEAFLET = true;
+        var module = '{{ module }}'.replace(/__prefix__/g, '__PREFIX__');
+        DEBUG_LEAFLET && console.debug('module = ' + module);
         window.LEAFLET_DATA = window.LEAFLET_DATA || {};
-        window.LEAFLET_DATA['{{ module }}'] = {};
-        window.LEAFLET_DATA['{{ module }}'].fieldid = '{{ id }}';
-        window.LEAFLET_DATA['{{ module }}'].modifiable = {{ modifiable|yesno:"true,false" }};
-        window.LEAFLET_DATA['{{ module }}'].geom_type = '{{ geom_type }}';
-        window.LEAFLET_DATA['{{ module }}'].srid = {{ map_srid }};
-        console.debug('module = {{ module }}');
+        window.LEAFLET_DATA[module] = {};
+        window.LEAFLET_DATA[module].fieldid = '{{ id }}';
+        window.LEAFLET_DATA[module].modifiable = {{ modifiable|yesno:"true,false" }};
+        window.LEAFLET_DATA[module].geom_type = '{{ geom_type }}';
+        window.LEAFLET_DATA[module].srid = {{ map_srid }};
     {% endblock vars %}
 
     function {{ id_map_callback }}(map, options) {
