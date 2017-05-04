@@ -2,7 +2,7 @@
 wagtail-leaflet
 ===============
 
-**This project does nothing at all now !** 
+**This project does nothing at all now !**
 
 It's more a POC than every thing else :)
 
@@ -25,12 +25,45 @@ Add application to your INSTALLED_APPS:
    INSTALLED_APPS = [
    ...
    'wagtailleaflet',
+   'leaflet',
+   'djgeojson',
    ...
    ]
 
 
+Demo project
+============
+
+This project aims to demontrate the usage of map blocks in a wagtail project.
+
+Installation
+------------
+
+Create a virtualenv and initialize the project
+
+.. code-block:: sh
+
+   $ virtualenv ./virtualenv
+   $ . ./virtualenv/bin/activate
+   $ cd demo
+   $ pip install -r requirements.txt
+   $ ./manage.py migrate
+   $ ./manage.py createsuperuser
+
+Usage
+------------
+
+Launch dev server
+
+.. code-block:: sh
+
+   $ ./manage.py runserver
+
+
+
+
+
+
+
 Enjoy !
 =======
-
-
-

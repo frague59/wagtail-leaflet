@@ -26,6 +26,15 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    # Demo application
+    'leaflet_demo',
+
+    # Leaflet integration
+    'wagtailleaflet',
+    'leaflet',
+    'djgeojson',
+
+    # Original settings
     'home',
     'search',
 
@@ -50,11 +59,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # Leaflet integration
-    'wagtailleaflet',
-    'leaflet',
-    'djgeojson',
 ]
 
 MIDDLEWARE = [

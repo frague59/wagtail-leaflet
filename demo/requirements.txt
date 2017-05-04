@@ -2,4 +2,4 @@ Django>=1.11,<1.12
 wagtail>=1.10,<1.11
 django-leaflet
 django-geojson
-
+jsonfield

@@ -148,3 +148,9 @@ secret.txt
 
 # Fabric task temporary files
 **/.fab_tasks~
+
+
+# Demo sqlite file
+**/db.sqlite3
+
+
