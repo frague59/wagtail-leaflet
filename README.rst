@@ -54,10 +54,21 @@ Usage
 ------------
 
 Launch dev server
+~~~~~~~~~~~~~~~~~
 
 .. code-block:: sh
 
    $ ./manage.py runserver
+
+Browse to admin page
+
+.. code-block:: sh
+
+   $ firefox http://127.0.0.1:8000/admin/
+
+Create the initial page
+~~~~~~~~~~~~~~~~~~~~~~~
+
 
 
 
