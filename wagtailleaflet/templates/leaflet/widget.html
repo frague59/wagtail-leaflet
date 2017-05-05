@@ -10,20 +10,20 @@
 
 <script type="text/javascript">
     {% block vars %}
-        const DEBUG_LEAFLET = true;
-        var module = '{{ module }}'.replace(/__prefix__/g, '__PREFIX__');
-        DEBUG_LEAFLET && console.debug('module = ' + module);
+        window.DEBUG_LEAFLET = true;
+        window.DEBUG_LEAFLET && console.debug('widget.html : id_map = ' + '{{ id_map }}');
         window.LEAFLET_DATA = window.LEAFLET_DATA || {};
-        window.LEAFLET_DATA[module] = {};
-        window.LEAFLET_DATA[module].fieldid = '{{ id }}';
-        window.LEAFLET_DATA[module].modifiable = {{ modifiable|yesno:"true,false" }};
-        window.LEAFLET_DATA[module].geom_type = '{{ geom_type }}';
-        window.LEAFLET_DATA[module].srid = {{ map_srid }};
+        window.LEAFLET_DATA['{{ id_map }}'] = {};
+        window.LEAFLET_DATA['{{ id_map }}'].fieldid = '{{ id }}';
+        window.LEAFLET_DATA['{{ id_map }}'].modifiable = {{ modifiable|yesno:"true,false" }};
+        window.LEAFLET_DATA['{{ id_map }}'].geom_type = '{{ geom_type }}';
+        window.LEAFLET_DATA['{{ id_map }}'].srid = {{ map_srid }};
     {% endblock vars %}
 
-    function {{ id_map_callback }}(map, options) {
-        window.LEAFLET_DATA['{{ module }}'].store_class = {{ field_store_class }};
-        (new {{ geometry_field_class}}(window.LEAFLET_DATA['{{ module }}'])).addTo(map);
+    window.LEAFLET_FUNCTIONS = window.LEAFLET_FUNCTIONS || {};
+    window.LEAFLET_FUNCTIONS['{{ id_map }}'] = function(map, options) {
+        window.LEAFLET_DATA['{{ id_map }}'].store_class = {{ field_store_class }};
+        (new {{ geometry_field_class}}(window.LEAFLET_DATA['{{ id_map }}'])).addTo(map);
         {% block callback %}{% endblock callback %}
     };
 
@@ -33,7 +33,7 @@
             target_map.on('map:loadfield', function (me) {
                 if (me.fieldid == 'id_{{ target_map }}') {
                     setTimeout(function () {
-                        {{ id_map_callback }}(target_map, e.detail.options);
+                        window.LEAFLET_FUNCTIONS['{{ id_map }}'](target_map, e.detail.options);
                     }, 0);
                 }
             });

@@ -15,8 +15,9 @@ import logging
 from django import forms
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
-from djgeojson.fields import GeoJSONFormField
-from wagtail.wagtailcore.blocks import StructBlock, CharBlock, FieldBlock
+from wagtail.wagtailcore.blocks import FieldBlock
+
+from wagtailleaflet.forms import BlockGeoJSONFormField
 
 __author__ = 'fguerin'
 logger = logging.getLogger('wagtailleaflet.blocks')
@@ -25,15 +26,18 @@ logger = logging.getLogger('wagtailleaflet.blocks')
 class GeoJSONBlock(FieldBlock):
     geom_type = None
 
+    def id_for_label(self, prefix):
+        return 'id_for_label_%s' % prefix
+
     def __init__(self, required=True, help_text=None, max_length=None, min_length=None, **kwargs):
         if self.geom_type is None:
             raise NotImplemented('You are attempting to use ``GeoJSONBlock`` directly, which *WILL* not work !')
 
-        self.field = GeoJSONFormField(required=required,
-                                      help_text=help_text,
-                                      max_length=max_length,
-                                      min_length=min_length,
-                                      geom_type=self.geom_type)
+        self.field = BlockGeoJSONFormField(required=required,
+                                           help_text=help_text,
+                                           max_length=max_length,
+                                           min_length=min_length,
+                                           geom_type=self.geom_type)
         super(GeoJSONBlock, self).__init__(**kwargs)
 
     def render_form(self, value, prefix='', errors=None):
