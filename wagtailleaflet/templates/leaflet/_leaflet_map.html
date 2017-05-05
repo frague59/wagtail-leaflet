@@ -1,0 +1,45 @@
+{% load i18n %}
+{% load static from staticfiles %}
+{% if creatediv %}
+    <div id="{{ name }}" class="leaflet-container-default"></div>{% endif %}
+<script type="text/javascript">
+    (function () {
+        window.DEBUG_LEAFLET && console.debug('_leaflet_map.html : name = ' + '{{ name }}');
+
+        function loadmap() {
+            window.DEBUG_LEAFLET && console.debug('_leaflet_map.html:loadmap()');
+            var djoptions = {% autoescape off %}{{ djoptions }}{% endautoescape %},
+                options = {
+                    djoptions: djoptions,
+                    initfunc: loadmap,
+                    globals: {{ NO_GLOBALS|yesno:"false,true"}},
+                    callback: window.LEAFLET_FUNCTIONS['{{ name }}']
+                    // callback: {{ callback|default:"null" }}
+                };
+            L.Map.djangoMap('{{ name }}', options);
+        }
+
+        var loadevents = {% autoescape off %}{{ loadevents }}{% endautoescape %};
+
+        window.DEBUG_LEAFLET && console.debug('_leaflet_map.html: loadevents.length = ' + loadevents.length);
+
+        if (loadevents.length === 0) {
+            window.DEBUG_LEAFLET && console.debug('_leaflet_map.html: loadmap call');
+            loadmap();
+        } else if (window.addEventListener) {
+            for (var i = 0; i < loadevents.length; i++) {
+                var event = loadevents[i];
+                window.DEBUG_LEAFLET && console.debug('_leaflet_map.html:addEventListener('+ event +')');
+                // window.addEventListener(event, loadmap, false);
+                loadmap();
+            }
+        } else if (window.jQuery) {
+            window.DEBUG_LEAFLET && console.debug('_leaflet_map.html:jQuery call !');
+            jQuery(window).on(loadevents.join(' '), loadmap);
+        }
+        {% if not NO_GLOBALS %}
+            // Put initialization function in global scope (like django-leaflet < 0.7)
+            window['loadmap' + '{{ name }}'] = loadmap;
+        {% endif %}
+    })();
+</script>
