@@ -149,3 +149,10 @@ WAGTAIL_SITE_NAME = "demo"
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://example.com'
+
+if 'leaflet' in INSTALLED_APPS:
+    LEAFLET_CONFIG = {'DEFAULT_CENTER': (50.726, 3.1613),
+                      'DEFAULT_ZOOM': 13,
+                      'MIN_ZOOM': 4,
+                      'MAX_ZOOM': 18,
+                      'SCALE': 'metric'}

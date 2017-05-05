@@ -26,9 +26,6 @@ logger = logging.getLogger('wagtailleaflet.blocks')
 class GeoJSONBlock(FieldBlock):
     geom_type = None
 
-    def id_for_label(self, prefix):
-        return 'id_for_label_%s' % prefix
-
     def __init__(self, required=True, help_text=None, max_length=None, min_length=None, **kwargs):
         if self.geom_type is None:
             raise NotImplemented('You are attempting to use ``GeoJSONBlock`` directly, which *WILL* not work !')
@@ -62,7 +59,10 @@ class GeoJSONBlock(FieldBlock):
         :returns: HTML Fragment  
         """
         logger.debug('MapBlock::render() value = %s', value)
-        rendered = super(GeoJSONBlock, self).render(value=value, context=context)
+        local_context = context or {}
+        logger.debug('MapBlock::render() name = %s', self.name)
+        local_context['name'] = self.name
+        rendered = super(GeoJSONBlock, self).render(value=value, context=local_context)
         return rendered
 
     @property
@@ -84,6 +84,9 @@ class GeoJSONBlock(FieldBlock):
         output = render_to_string('wagtailleaflet/leaflet_forms.html')
         return output
 
+    class Meta:
+        template = 'wagtailleaflet/blocks/wagtailleaflet.html'
+
 
 class GeoJSONPointBlock(GeoJSONBlock):
     """
@@ -96,7 +99,6 @@ class GeoJSONPointBlock(GeoJSONBlock):
 
     class Meta:
         icon = 'pick'
-        template = 'wagtailleaflet/blocks/wagtailleaflet_point.html'
         label = _('Point map')
 
 
